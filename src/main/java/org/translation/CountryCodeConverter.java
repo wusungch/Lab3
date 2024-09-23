@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Dictionary;
+import java.util.Hashtable;
 import java.util.List;
 
 /**
@@ -11,7 +13,8 @@ import java.util.List;
  */
 public class CountryCodeConverter {
 
-    // TODO Task: pick appropriate instance variable(s) to store the data necessary for this class
+    private Dictionary<String, String> codeToName = new Hashtable<>();
+    private Dictionary<String, String> nameToCode = new Hashtable<>();
 
     /**
      * Default constructor which will load the country codes from "country-codes.txt"
@@ -31,14 +34,18 @@ public class CountryCodeConverter {
         try {
             List<String> lines = Files.readAllLines(Paths.get(getClass()
                     .getClassLoader().getResource(filename).toURI()));
-
-            // TODO Task: use lines to populate the instance variable(s)
+            String tab = "\t";
+            for (String line : lines) {
+                codeToName.put(line.split(tab)[2].toLowerCase(), line.split(tab)[0]);
+                nameToCode.put(line.split(tab)[0].toLowerCase(), line.split(tab)[2]);
+            }
+            codeToName.remove("alpha-3 code");
+            nameToCode.remove("country");
 
         }
         catch (IOException | URISyntaxException ex) {
             throw new RuntimeException(ex);
         }
-
     }
 
     /**
@@ -47,8 +54,7 @@ public class CountryCodeConverter {
      * @return the name of the country corresponding to the code
      */
     public String fromCountryCode(String code) {
-        // TODO Task: update this code to use an instance variable to return the correct value
-        return code;
+        return codeToName.get(code.toLowerCase());
     }
 
     /**
@@ -57,8 +63,7 @@ public class CountryCodeConverter {
      * @return the 3-letter code of the country
      */
     public String fromCountry(String country) {
-        // TODO Task: update this code to use an instance variable to return the correct value
-        return country;
+        return nameToCode.get(country.toLowerCase());
     }
 
     /**
@@ -66,7 +71,6 @@ public class CountryCodeConverter {
      * @return how many countries are included in this code converter.
      */
     public int getNumCountries() {
-        // TODO Task: update this code to use an instance variable to return the correct value
-        return 0;
+        return nameToCode.size();
     }
 }

@@ -1,13 +1,13 @@
 package org.translation;
 
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
-import static org.junit.Assert.*;
+import org.junit.Test;
 
 public class CountryCodeConverterTest {
 
     @Test
-    public void fromCountryCodeUSA() {
+    public void fromCountryCodeUsa() {
         CountryCodeConverter converter = new CountryCodeConverter();
         assertEquals("United States of America (the)", converter.fromCountryCode("usa"));
     }
