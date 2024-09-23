@@ -1,19 +1,19 @@
 package org.translation;
 
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
+import org.junit.Test;
 
 public class JSONTranslatorTest {
 
-    JSONTranslator jsonTranslator = new JSONTranslator();
+    private JSONTranslator jsonTranslator = new JSONTranslator();
 
     @Test
     public void getCountryLanguages() {
-       List<String> countryLanguages = jsonTranslator.getCountryLanguages("can");
-       assertEquals("There should be 35 languages but got " + countryLanguages.size(), 35, countryLanguages.size());
+        List<String> countryLanguages = jsonTranslator.getCountryLanguages("can");
+        assertEquals("There should be 35 languages but got " + countryLanguages.size(), 35, countryLanguages.size());
     }
 
     @Test
